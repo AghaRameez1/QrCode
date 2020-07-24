@@ -37,4 +37,4 @@ class ProductSearch(APIView):
             serializer = ProductsSerializer(products, many=True)
             return Response(serializer.data)
         else:
-            return Response('No entry', status=status.HTTP_204_NO_CONTENT)
+            return Response('No Data', status=status.HTTP_204_NO_CONTENT)
