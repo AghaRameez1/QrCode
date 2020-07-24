@@ -20,7 +20,7 @@ def create_UserProfile(sender, instance, created, **kwargs):
 post_save.connect(create_UserProfile, sender=UserProfile)
 
 class Products(models.Model):
-    barcode = models.CharField(max_length=255, null=True, blank=True)
+    barcode = models.CharField(max_length=255)
     product_description = models.CharField(max_length=255, null=True, blank=True)
     product_name = models.CharField(max_length=255, null=True, blank=True)
     product_brand = models.CharField(max_length=255, null=True, blank=True)
