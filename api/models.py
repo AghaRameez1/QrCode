@@ -22,7 +22,7 @@ post_save.connect(create_UserProfile, sender=UserProfile)
 class Products(models.Model):
     barcode = models.CharField(max_length=255)
     product_description = models.CharField(max_length=255, null=True, blank=True)
-    product_name = models.CharField(max_length=255, null=True, blank=True)
+    product_name = models.CharField(max_length=255)
     product_brand = models.CharField(max_length=255, null=True, blank=True)
     product_score = models.CharField(max_length=255, null=True, blank=True)
 
