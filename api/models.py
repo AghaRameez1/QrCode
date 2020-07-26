@@ -25,6 +25,7 @@ class Products(models.Model):
     product_name = models.CharField(max_length=255)
     product_brand = models.CharField(max_length=255, null=True, blank=True)
     product_score = models.CharField(max_length=255, null=True, blank=True)
+    product_image = models.FileField(upload_to='product_images/', null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now_add=True)

@@ -10,7 +10,7 @@ from api.models import Products
 class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
-        fields = ['barcode', 'product_description', 'product_name', 'product_brand', 'product_score']
+        fields = ['barcode', 'product_description', 'product_name', 'product_brand', 'product_score', 'product_image']
 
     def create(self, validated_data):
         return Products.objects.create(**validated_data)

@@ -11,5 +11,5 @@ admin.site.register(UserProfile,UserProfileAdmin)
 
 
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ['barcode','product_description','product_name','product_brand','product_score','created_at','modified_at']
+    list_display = ['barcode','product_description','product_name','product_brand','product_score','product_image','created_at','modified_at']
 admin.site.register(Products,ProductsAdmin)
