@@ -20,7 +20,6 @@ from django.urls import path, include
 
 from api.views.indexView import indexView
 from untitled1 import settings
-print(settings.MEDIA_URL, settings.MEDIA_ROOT)
 urlpatterns = [
     url('^$', indexView.as_view()),
     path('admin/', admin.site.urls),
