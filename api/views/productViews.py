@@ -13,7 +13,7 @@ from api.models import Products
 
 
 class ProductView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         products = Products.objects.all()
