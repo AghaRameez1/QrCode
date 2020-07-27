@@ -34,7 +34,8 @@
                         <td>{{ p.product_name }}</td>
                         <td>{{ p.product_description }}</td>
                         <td>{{ p.product_brand }}</td>
-                        <td style="width: 40%"><img class='img-fluid' style="width: 40%" src="{{ p.product_image.url|default_if_none:'None' }}" ></td>
+                        <td style="width: 40%">{% if p.product_image %}<img class='img-fluid' style="width: 40%" src="{{ p.product_image.url }}" >
+                        {% else %}"None"{% endif %}</td>
                         <td>{{ p.created_at }}</td>
                     </tr>
                 {% endfor %}
