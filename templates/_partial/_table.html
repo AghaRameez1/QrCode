@@ -1,0 +1,53 @@
+{% load static %}
+{% load humanize %}
+{% block body %}
+    <table id="table_id" class="compact cell-border hover stripe" style="width: 100%    ;">
+        <thead>
+        <th>Barcode</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Brand</th>
+        <th>Score</th>
+        <th>Image</th>
+        <th>Created At</th>
+        {% if request.user.is_authenticated %}
+            <th>Action</th>
+        {% endif %}
+        </thead>
+        <tbody>
+        {% for p in product %}
+            <tr>
+                <td>{{ p.barcode }}</td>
+                <td>{{ p.product_name }}</td>
+                <td>{{ p.product_description }}</td>
+                <td>{{ p.product_brand }}</td>
+                <td>{{ p.product_score }}</td>
+                <td style="width:15%">{% if p.product_image %}
+                    <img class='img-circle img-responsive img-rounded' style="width: 100%"
+                         src="{{ p.product_image.url }}">
+                {% else %}None{% endif %}</td>
+                <td>{{ p.created_at|naturaltime }}</td>
+                {% if request.user.is_authenticated %}
+                    <td>
+                        <button type="button" class="btn btn-block btn-warning">Update</button>
+                        <button type="button" class="btn btn-block btn-danger"
+                                onclick="productModule.delete({{ p.id }})">
+                            Delete
+                        </button>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                responsive: true,
+
+            });
+        });
+    </script>
+{% endblock %}

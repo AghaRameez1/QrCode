@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BarCode Example</title>
+    <link rel="stylesheet" href="{% static 'custom/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'custom/swal/swal.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'custom/css/jquery.dataTables.css' %}">
+
+</head>
+<body>
+{% block body %}
+{% endblock %}
+</body>
+<script src="{% static 'custom/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'custom/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'custom/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'custom/js/popper.min.js' %}"></script>
+<script src="{% static 'custom/js/network.js' %}"></script>
+<script src="{% static 'custom/swal/swal.min.js' %}"></script>
+{% block script %}
+{% endblock %}
+
+</html>

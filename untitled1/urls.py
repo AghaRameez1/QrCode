@@ -18,10 +18,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from api.views.indexView import indexView
 from untitled1 import settings
+
 urlpatterns = [
-    url('^$', indexView.as_view()),
+    url('^', include('webview.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
 ]

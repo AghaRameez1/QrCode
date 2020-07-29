@@ -1,63 +1,37 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BarCode Example</title>
-    <link rel="stylesheet" href="{% static 'custom/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'custom/css/jquery.dataTables.css' %}">
+{% load humanize %}
 
-</head>
-<body>
-<div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4">Python is awesome</h1>
-        <p class="lead">Learning Django is Fun</p>
-        <hr class="my-4">
 
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="table_id" class="cell-border hover stripe">
-                <thead>
-                <th>Barcode</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Brand</th>
-                <th>Score</th>
-                <th>Image</th>
-                <th>Created At</th>
-                </thead>
-                <tbody>
-                {% for p in product %}
-                    <tr>
-                        <td>{{ p.barcode }}</td>
-                        <td>{{ p.product_name }}</td>
-                        <td>{{ p.product_description }}</td>
-                        <td>{{ p.product_brand }}</td>
-                        <td>{{ p.product_score }}</td>
-                        <td style="width: 40%">{% if p.product_image %}
-                            <img class='img-fluid' style="width: 40%" src="{{ p.product_image.url }}">
-                        {% else %}"None"{% endif %}</td>
-                        <td>{{ p.created_at }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+{% block body %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Python is awesome</h1>
+            <p class="lead">Learning Django is Fun</p>
+            <hr class="my-4">
+            <a href="{% url 'productAdd' %}" class="btn btn-block btn-success">Add</a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="btn btn-block btn-danger">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-block btn-success">Login</a>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-md-12 productTable">
+                {% include '_partial/_table.html' %}
+            </div>
         </div>
     </div>
-</div>
-</body>
-<script src="{% static 'custom/js/jquery-3.2.1.slim.min.js' %}"></script>
-<script src="{% static 'custom/js/bootstrap.min,js.js' %}"></script>
-<script src="{% static 'custom/js/popper.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'custom/js/jquery.dataTables.js' %}"></script>
-<script>
-    $(document).ready(function () {
-        $('#table_id').DataTable({
-            responsive: true,
+{% endblock %}
+{% block script %}
 
+    <script src="{% static "custom/js/custom.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                responsive: true,
+
+            });
         });
-    });
-</script>
-</html>
+    </script>
+{% endblock %}
