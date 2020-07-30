@@ -90,7 +90,6 @@ class loginView(View):
         return render(request, 'login.html', context)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
         form = loginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
@@ -100,7 +99,8 @@ class loginView(View):
             if user is not None:
                 login(request, user)
                 return HttpResponse('success')
-
+            else:
+                return HttpResponse('error')
         else:
             print(form.errors)
             return HttpResponse('error')
