@@ -24,15 +24,58 @@ class indexView(View):
 class deleteView(View):
     def dispatch(self, request, *args, **kwargs):
         return super(deleteView, self).dispatch(request, *args, **kwargs)
+
     def delete(self, request, id, *args, **kwargs):
         if request.user.is_authenticated:
-            Products.objects.filter(id= id).delete()
+            Products.objects.filter(id=id).delete()
             product_obj = Products.objects.all()
             context = {
                 'product': product_obj
             }
-            string = render(request,'_partial/_table.html',context)
+            string = render(request, '_partial/_table.html', context)
             return HttpResponse(string)
+
+
+class updateView(View):
+    def dispatch(self, request, *args, **kwargs):
+        return super(updateView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request, id, *args, **kwargs):
+        if request.user.is_authenticated:
+            product_obj = Products.objects.get(id=id)
+            form = productAddForm(initial={'barcode': product_obj.barcode, 'product_name': product_obj.product_name,
+                                           'product_brand': product_obj.product_brand,
+                                           'product_description': product_obj.product_description,
+                                           'product_score': product_obj.product_score,
+                                           'product_image': product_obj.product_image})
+            context = {
+                'product': product_obj,
+                'form': form
+            }
+            string = render(request, 'productUpdate.html', context)
+            return HttpResponse(string)
+        else:
+            return redirect('index')
+
+    def post(self, request, id, *args, **kwargs):
+        form = productAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data
+            product_obj = Products.objects.get(id=id)
+            product_obj.barcode = data['barcode']
+            product_obj.product_name = data['product_name']
+            product_obj.product_description = data['product_description']
+            product_obj.product_brand = data['product_brand']
+            product_obj.product_score = data['product_score']
+            if request.FILES:
+                product_obj.product_image = data['product_image']
+            else:
+                product_obj.product_image = product_obj.product_image
+            product_obj.save()
+            return HttpResponse('success')
+        else:
+            print(form.errors)
+            return HttpResponse('error')
 
 
 class loginView(View):
@@ -99,7 +142,7 @@ class productAdd(View):
             description = data['product_description']
             brand = data['product_brand']
             score = data['product_score']
-            image = request.FILES['product_image']
+            image = data['product_image']
             Products.objects.create(
                 barcode=barcode,
                 product_name=name,

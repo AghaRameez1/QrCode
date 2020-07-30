@@ -14,8 +14,9 @@ class productAddForm(forms.ModelForm):
         self.fields['barcode'].widget.attrs['class']= "form-control"
         self.fields['product_score'].required = True
         self.fields['product_score'].widget.attrs['class']= "form-control"
-        self.fields['product_image'].required = True
+        self.fields['product_image'].required = False
         self.fields['product_image'].widget.attrs['class']= "form-control-file"
+        self.fields['product_image'].widget.attrs['accept']="image/*"
 
         self.fields['product_brand'].required = True
         self.fields['product_brand'].widget.attrs['class'] = "form-control"

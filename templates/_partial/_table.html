@@ -29,7 +29,7 @@
                 <td>{{ p.created_at|naturaltime }}</td>
                 {% if request.user.is_authenticated %}
                     <td>
-                        <button type="button" class="btn btn-block btn-warning">Update</button>
+                        <a type="button" class="btn btn-block btn-warning" href="/update/{{ p.id }}/">Update</a>
                         <button type="button" class="btn btn-block btn-danger"
                                 onclick="productModule.delete({{ p.id }})">
                             Delete
