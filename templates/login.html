@@ -4,11 +4,12 @@
 {% block body %}
 
     <div class="container">
+
         <div class="jumbotron">
+            <a href="{% url 'index' %}" class="btn btn-success">Home</a>
             <h1 class="display-4">Python is awesome</h1>
-            <p class="lead">Learning Django is Fun</p>
+            <p class="lead">Sign In to add products</p>
             <hr class="my-4">
-            <a href="{% url 'index' %}" class="btn btn-block btn-success">Home</a>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -21,19 +22,19 @@
                                 Looks good!
                             </div>
                         </div>
-
                     </div>
                     <div class="form-group row">
                         <label for="id_product_description" class="col-sm-2 col-form-label">Password:</label>
                         <div class="col-sm-10">
                             {{ form.password }}
-
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-block btn-primary">Sign In</button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Sign In</button>
+                     </div>
                 </form>
             </div>
         </div>
@@ -41,7 +42,7 @@
 {% endblock %}
 {% block script %}
     <script src="{% static "custom/js/custom.js" %}"></script>
-<script>
+    <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
             'use strict';
@@ -56,7 +57,7 @@
                             event.preventDefault();
                             event.stopPropagation();
                         } else {
-                             event.preventDefault();
+                            event.preventDefault();
                             event.stopPropagation();
                             productModule.signIn();
                         }

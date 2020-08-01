@@ -121,7 +121,6 @@ class productAdd(View):
         return super(productAdd, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        # print(request.user)
         if request.user.is_authenticated:
             form = productAddForm
             context = {
@@ -129,8 +128,7 @@ class productAdd(View):
             }
             return render(request, 'productAdd.html', context)
         else:
-            string = render_to_string('404.html')
-            return HttpResponse(string)
+            return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = productAddForm(request.POST, request.FILES)

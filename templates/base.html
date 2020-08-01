@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>BarCode Example</title>
+    <link rel="icon" type="image/png" href="{% static 'custom/images/favicon.ico' %}"/>
     <link rel="stylesheet" href="{% static 'custom/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'custom/swal/swal.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'custom/css/jquery.dataTables.css' %}">
@@ -11,6 +12,9 @@
 </head>
 <body>
 {% block body %}
+{% endblock %}
+{% block footer %}
+    {% include '_partial/_footer.html' %}
 {% endblock %}
 </body>
 <script src="{% static 'custom/js/jquery-3.2.1.min.js' %}"></script>

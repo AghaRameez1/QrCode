@@ -33,17 +33,34 @@ var productModule = {
         })
     },
     delete: function (id) {
-        var url = 'delete/' + id + '/';
-        var data = {};
-        var type = 'DELETE';
-        NetworkModule.getData(url, type, data, function (response) {
-            if (response) {
-                $('.productTable').html(response)
-            } else {
-                swal('error', 'Network Error', 'error')
-            }
+        swal({
+            title: "Do you want to delete the product?",
+            icon: "warning",
+            showCancelButton: true,
+            //dangerMode: true, //set this in case the focus should be on cancel button
+            buttons: {
+                cancel: true,
+                confirm: true,
+            },
+        }).then(isConfirmed => {
+                if (isConfirmed) {
+                    var url = 'delete/' + id + '/';
+                    var data = {};
+                    var type = 'DELETE';
+                    NetworkModule.getData(url, type, data, function (response) {
+                        if (response) {
+                            $('.productTable').html(response)
+                            swal('sucess','Product Deleted!!','success');
+                        } else {
+                            swal('error', 'Network Error', 'error')
+                        }
 
-        })
+                    })
+                } else {
+                    swal('Success','Item Not Deleted!!','success')
+                }
+            }
+        );
     },
     update: function (id) {
         var form = new FormData()
